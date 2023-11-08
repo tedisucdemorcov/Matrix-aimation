@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      href="https://img.icons8.com/color/48/matrix-desktop.png"
+      width="48"
+      height="48"
+    />
+    <title>Matrix loading screen</title>
+    <script src="/MatrixWithJS/js/script.js"></script>
+  </head>
+  <body style="margin: 0; overflow: hidden;">
+    <canvas style="position: fixed; top: 0; left: 0; width: 100%; height: 100%;"></canvas>
+    <script>let canvas = document.querySelector("canvas");
+
+        let ctx = canvas.getContext("2d");
+        let width = (canvas.width = window.innerWidth);
+        let height = (canvas.height = window.innerHeight);
+        let str =
+          "As f a=sa d w=w0+ )ewe( (*_ &iui  jdp %i mks 3$4 32 TY 4 !qwq 32 42 4a";
+        let matrix = str.split("");
+        let font = 12;
+        let col = width / font;
+        let arr = [];
+        
+        for (let i = 0; i < col; i++) {
+          arr[i] = 1;
+        }
+        
+        const draw = () => {
+          ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+          ctx.fillRect(0, 0, width, height);
+          ctx.fillStyle = "#00FF00";
+          ctx.font = `${font}px system-ui`;
+        
+          for (let i = 0; i < arr.length; i++) {
+            let txt = matrix[Math.floor(Math.random() * matrix.length)];
+            ctx.fillText(txt, i * font, arr[i] * font);
+        
+            if (arr[i] * font > height && Math.random() > 0.975) {
+              arr[i] = 0;
+            }
+            arr[i]++;
+          }
+        };
+        setInterval(draw, 20);
+        
+        window.addEventListener("resize", () => {
+          width = canvas.width = window.innerWidth;
+          height = canvas.height = window.innerHeight;
+          col = width / font;
+          arr = [];
+          for (let i = 0; i < col; i++) {
+            arr[i] = 1;
+          }
+        });</script>
+  </body>
+</html>
